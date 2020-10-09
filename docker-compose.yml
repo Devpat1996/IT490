@@ -7,10 +7,11 @@ services:
        - 15672:15672
      
     db:
-      image: 'postgres'
+      build: db/
       environment:
        POSTGRES_PASSWORD: 'example'
-       
+      volumes:
+        -   data-volume:/var/lib/postgresql/data
     front-end:
      build: front-end/
      ports:
@@ -18,3 +19,5 @@ services:
       
     back-end:
      build: back-end/
+volumes:
+    data-volume:
